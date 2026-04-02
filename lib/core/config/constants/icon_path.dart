@@ -15,6 +15,7 @@ class IconPath {
   /// Financial
   static const String greenDollar = 'assets/images/icons/green_dollar_sign.png';
   static const String whiteDollar = 'assets/images/icons/white_dollar.png';
+  static const String whiteClock = 'assets/images/icons/white_clock.png';
   static const String greyDollar = 'assets/images/icons/grey_dollar_icon.png';
 
   /// Status Icons
