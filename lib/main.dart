@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taskora/core/config/constants/app_strings.dart';
 import 'package:taskora/core/router/routers_name.dart';
 import 'package:taskora/core/theme/light_theme.dart';
-import 'package:taskora/features/presentation/pages/home_screen/home_screen.dart';
 
-import 'features/presentation/splash_onboarding/onboarding_screen.dart';
+import 'features/pages/home_screen/home_screen.dart';
+import 'features/splash_onboarding/presentation/pages/onboarding_screen.dart';
 
 void main() {
   runApp(const MyApp());

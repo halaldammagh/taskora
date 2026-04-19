@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taskora/core/config/constants/color_manager.dart';
 import 'package:taskora/core/extensions/text_style_extension.dart';
 
-import '../../../core/config/widgets/custom_elevated_button.dart';
+import '../../../../../core/config/widgets/custom_elevated_button.dart';
 
 class OnboardingScreen extends StatelessWidget {
   const OnboardingScreen({super.key});
