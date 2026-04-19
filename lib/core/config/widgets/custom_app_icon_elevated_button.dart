@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:taskora/core/config/constants/app_sizes.dart';
 
 class CustomAppIconElevatedButton extends StatelessWidget {
   final String label;
@@ -22,7 +23,7 @@ class CustomAppIconElevatedButton extends StatelessWidget {
     this.width,
     this.height,
     this.textStyle,
-    this.borderRadius = 5,
+    this.borderRadius = AppSizes.radiusSm,
   });
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:taskora/core/config/constants/app_sizes.dart';
 
 class AppLogo extends StatelessWidget {
   final double? width;
@@ -11,8 +12,8 @@ class AppLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       'assets/images/logo.png',
-      width: width ?? 150.w,
-      height: height ?? 150.h,
+      width: width ?? AppSizes.mdSizeImage.w,
+      height: height ?? AppSizes.mdSizeImage.h,
       fit: BoxFit.contain,
     );
   }

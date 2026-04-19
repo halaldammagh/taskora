@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:taskora/core/config/constants/app_sizes.dart';
 
 import '../../../../../core/config/constants/color_manager.dart';
 import '../../../../../core/config/widgets/app_status_badge.dart';
@@ -25,7 +26,7 @@ class HomeTab extends StatelessWidget {
       height: 65.16.h,
       decoration: BoxDecoration(
         color: ColorManager.primaryLight,
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(AppSizes.radiusXl),
       ),
       child: Row(
         children: [
@@ -57,7 +58,7 @@ class HomeTab extends StatelessWidget {
               decoration: BoxDecoration(
                 color: slideColor ?? ColorManager.accent,
                 borderRadius: BorderRadius.horizontal(
-                  right: Radius.circular(10),
+                  right: Radius.circular(AppSizes.radiusMd),
                 ),
               ),
             ),

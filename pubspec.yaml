@@ -88,13 +88,13 @@ flutter:
   fonts:
     - family: MontserratArabic
       fonts:
-        - asset: assets/fonts/montserrat/Montserrat-Arabic Light 300.otf
+        - asset: assets/fonts/montserrat/Montserrat-Arabic-Light-300.otf
           weight: 300
-        - asset: assets/fonts/montserrat/Montserrat-Arabic Regular 400.otf
+        - asset: assets/fonts/montserrat/Montserrat-Arabic-Regular-400.otf
           weight: 400
-        - asset: assets/fonts/montserrat/Montserrat-Arabic Medium 500.otf
+        - asset: assets/fonts/montserrat/Montserrat-Arabic-Medium-500.otf
           weight: 500
-        - asset: assets/fonts/montserrat/Montserrat-Arabic Bold 700.otf
+        - asset: assets/fonts/montserrat/Montserrat-Arabic-Bold-700.otf
           weight: 700
 
     - family: Tajawal

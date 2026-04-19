@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:taskora/core/config/constants/app_sizes.dart';
 
 import '../constants/color_manager.dart';
 
@@ -14,13 +15,13 @@ class AppContainer extends StatelessWidget {
     required this.child,
     this.padding,
     this.color,
-    this.borderRadius = 16,
+    this.borderRadius = AppSizes.radiusXl,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: padding ?? const EdgeInsets.all(12),
+      padding: padding ?? const EdgeInsets.all(AppSizes.mdPaddingAll),
       decoration: BoxDecoration(
         color: color ?? ColorManager.white,
         borderRadius: BorderRadius.circular(borderRadius.r),

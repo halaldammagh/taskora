@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:taskora/core/config/constants/app_sizes.dart';
 import 'package:taskora/core/config/constants/color_manager.dart';
 
 class CustomElevatedButton extends StatelessWidget {
@@ -15,13 +16,11 @@ class CustomElevatedButton extends StatelessWidget {
     required this.decorationColor,
     this.borderSideColor,
     required this.onPressed,
-    this.borderRadius = 15,
+    this.borderRadius = AppSizes.radiusXl,
   });
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         side: BorderSide(color: borderSideColor ?? ColorManager.transparent),
@@ -29,7 +28,7 @@ class CustomElevatedButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(borderRadius.r),
         ),
         backgroundColor: decorationColor,
-        padding: EdgeInsets.symmetric(vertical: height * 0.015.h),
+        padding: EdgeInsets.symmetric(vertical: AppSizes.lgPaddingVertical),
       ),
       onPressed: onPressed,
       child: child,

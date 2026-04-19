@@ -6,6 +6,8 @@ class IconPath {
   static const String email = 'assets/images/icons/email.png';
   static const String lock = 'assets/images/icons/Lock.png';
   static const String user = 'assets/images/icons/user_icon.png';
+  static const String sliders = 'assets/images/icons/sliders_icon.png';
+  static const String notification = 'assets/images/icons/notification.png';
 
   /// Actions
   static const String done = 'assets/images/icons/done_icon.png';

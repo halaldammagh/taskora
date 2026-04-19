@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:taskora/core/config/constants/app_sizes.dart';
 import 'package:taskora/core/config/constants/color_manager.dart';
 
 typedef OnChanged = void Function(String)?;
@@ -47,8 +48,8 @@ class CustomTextFormField extends StatelessWidget {
     this.obscuringCharacter = '.',
     this.keyboardType,
     this.errorStyle,
-    this.verticalPadding = 16,
-    this.horizontalPadding = 15,
+    this.verticalPadding = AppSizes.lgPaddingVertical,
+    this.horizontalPadding = AppSizes.lgPaddingHorizontal,
     this.style,
     this.cursorColor,
   });
@@ -97,7 +98,7 @@ class CustomTextFormField extends StatelessWidget {
 
   OutlineInputBorder builtDecorationBorder({required Color borderColor}) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(15),
+      borderRadius: BorderRadius.circular(AppSizes.radiusXl),
       borderSide: BorderSide(width: 2, color: borderColor),
     );
   }

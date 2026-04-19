@@ -87,23 +87,9 @@ class ProfileTab extends StatelessWidget {
         ),
         SizedBox(height: 3.h),
         Text(
-          hours,
-          style: TextStyle(
-            fontFamily: 'Tajawal',
-            fontWeight: FontWeight.w600,
-            fontSize: 20,
-            color: ColorManager.black,
-          ),
-        ),
+          hours, style: TextStyleExtension.black20W600),
         Text(
-          label,
-          style: TextStyle(
-            fontFamily: 'Tajawal',
-            fontWeight: FontWeight.normal,
-            fontSize: 14,
-            color: ColorManager.black,
-          ),
-        ),
+          label, style: TextStyleExtension.black14Normal),
       ],
     );
   }

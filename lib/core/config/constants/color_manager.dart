@@ -49,6 +49,7 @@ class ColorManager {
 
   static const completedBg = Color(0xFFE3F2DC);
   static const completedText = Color(0xFF2E7D32);
+  static const circularProgress = Color(0xFF046A38);
 
   static const highBg = Color(0xFFF5D6D6);
   static const highText = Color(0xFFB23B3B);

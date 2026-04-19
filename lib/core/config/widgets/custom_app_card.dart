@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:taskora/core/config/constants/app_sizes.dart';
 import 'package:taskora/core/config/constants/color_manager.dart';
 
 class CustomAppCard extends StatelessWidget {
@@ -34,7 +35,8 @@ class CustomAppCard extends StatelessWidget {
       padding: padding,
       decoration: BoxDecoration(
         color: backgroundColor ?? ColorManager.white,
-        borderRadius: BorderRadius.circular(borderRadius ?? 16.r),
+        borderRadius: BorderRadius.circular(
+            borderRadius ?? AppSizes.radiusXl.r),
         border: Border.all(
           color: borderColor ?? ColorManager.secondary.withOpacity(1),
           width: borderWidth ?? 1.w,

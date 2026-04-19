@@ -10,14 +10,20 @@ class AppSizes {
   static const double huge = 40;
 
   ///Padding
-  static const double paddingHorizontal = lg;
-  static const double paddingVertical = xl;
+  static const double lgPaddingHorizontal = lg;
+  static const double xlPaddingVertical = xl;
+  static const double lgPaddingVertical = lg;
+  static const double smPaddingVertical = sm;
+  static const double mdPaddingAll = md;
+
+  ///Image Size
+  static const double mdSizeImage = 150;
 
   ///Border Radius
   static const double radiusSm = 4;
-  static const double radiusMd = 8;
+  static const double radiusMd = 10;
   static const double radiusLg = 12;
-  static const double radiusXl = 16;
+  static const double radiusXl = 15;
   static const double radiusCircular = 50;
 
   ///Icons

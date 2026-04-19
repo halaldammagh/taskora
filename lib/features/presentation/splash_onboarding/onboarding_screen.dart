@@ -3,6 +3,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taskora/core/config/constants/color_manager.dart';
+import 'package:taskora/core/extensions/text_style_extension.dart';
 
 import '../../../core/config/widgets/custom_elevated_button.dart';
 
@@ -44,23 +45,13 @@ class OnboardingScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
                 titleText,
                 maxLines: maxLine,
-                style: TextStyle(
-                  fontFamily: 'Tajawal',
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.sp,
-                  color: ColorManager.primary,
-                ),
+                  style: TextStyleExtension.primary20bold
               ),
               AutoSizeText(
                 textAlign: TextAlign.center,
                 decText,
                 maxLines: maxLine,
-                style: TextStyle(
-                  fontFamily: 'Tajawal',
-                  fontWeight: FontWeight.normal,
-                  fontSize: 18.sp,
-                  color: ColorManager.black,
-                ),
+                  style: TextStyleExtension.black18Normal
               ),
               CustomElevatedButton(
                 borderRadius: 5,
@@ -68,22 +59,15 @@ class OnboardingScreen extends StatelessWidget {
                   spacing: 5.w,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    isNext == true
-                        ? Icon(
+                    if(isNext)
+                      Icon(
                             Icons.arrow_back_outlined,
                             color: ColorManager.white,
                             fontWeight: FontWeight.bold,
-                          )
-                        : Text(''),
-
+                      ),
                     Text(
                       isNext == true ? 'التالي' : "تسجيل الدخول",
-                      style: TextStyle(
-                        fontFamily: 'Tajawal',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.sp,
-                        color: ColorManager.white,
-                      ),
+                        style: TextStyleExtension.white16bold
                     ),
                   ],
                 ),
