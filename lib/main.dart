@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taskora/core/config/constants/app_strings.dart';
 import 'package:taskora/core/router/routers_name.dart';
 import 'package:taskora/core/theme/light_theme.dart';
+import 'package:taskora/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 
+import 'core/cache/shared_prefs_utils.dart';
+import 'core/di/di.dart';
+import 'features/onboarding/presentation/bloc/onboarding_event.dart';
+import 'features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'features/pages/home_screen/home_screen.dart';
-import 'features/splash_onboarding/presentation/pages/onboarding_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
+  await SharedPrefsUtils.init();
+  runApp(MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+          getIt<OnboardingBloc>()
+            ..add(AppStartedEvent()),)
+      ],
+      child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
