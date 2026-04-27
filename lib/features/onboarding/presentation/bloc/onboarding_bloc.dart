@@ -23,7 +23,7 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingStatus> {
     Emitter<OnboardingStatus> emit,
   ) async {
     final isDone = await _checkOnboardingStatusUseCase.invoke();
-    emit(isDone ? NavigateToHomeState() : ShowOnboardingState());
+    emit(isDone ? NavigateToLoginState() : ShowOnboardingState());
   }
 
   Future<void> _onComplete(
@@ -31,6 +31,6 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingStatus> {
     Emitter<OnboardingStatus> emit,
   ) async {
     await _completeOnboardingUseCase.invoke();
-    emit(NavigateToHomeState());
+    emit(NavigateToLoginState());
   }
 }

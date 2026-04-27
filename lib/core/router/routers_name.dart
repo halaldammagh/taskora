@@ -1,4 +1,5 @@
 class RoutersName {
   static const String onboardingScreen = 'onboardingScreen';
-  static const String projectsScreen = 'projectsScreen';
+  static const String loginScreen = 'loginScreen';
+  static const String homeScreen = 'homeScreen';
 }

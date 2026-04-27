@@ -14,6 +14,6 @@ class ShowOnboardingState extends OnboardingStatus {
   const ShowOnboardingState();
 }
 
-class NavigateToHomeState extends OnboardingStatus {
-  const NavigateToHomeState();
+class NavigateToLoginState extends OnboardingStatus {
+  const NavigateToLoginState();
 }

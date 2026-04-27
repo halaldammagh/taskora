@@ -44,6 +44,7 @@ dependencies:
   injectable: ^3.0.0
   get_it: ^9.2.1
   json_annotation: ^4.11.0
+  flutter_localization: ^0.4.0
 
 
 

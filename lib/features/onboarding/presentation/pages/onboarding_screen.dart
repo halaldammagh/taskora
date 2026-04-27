@@ -1,96 +1,142 @@
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:taskora/core/config/constants/color_manager.dart';
-import 'package:taskora/core/extensions/text_style_extension.dart';
+import 'package:taskora/core/config/constants/image_path.dart';
+import 'package:taskora/core/router/routers_name.dart';
+import 'package:taskora/features/onboarding/presentation/bloc/onboarding_bloc.dart';
+import 'package:taskora/features/onboarding/presentation/bloc/onboarding_event.dart';
+import 'package:taskora/features/onboarding/presentation/bloc/onboarding_status.dart';
+import 'package:taskora/features/onboarding/presentation/widgets/build_onboarding_content_item.dart';
 
-import '../../../../../core/config/widgets/custom_elevated_button.dart';
-
-class OnboardingScreen extends StatelessWidget {
+class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
   @override
+  State<OnboardingScreen> createState() => _OnboardingScreenState();
+}
+
+class _OnboardingScreenState extends State<OnboardingScreen> {
+  // Data
+
+  static const _pages = [
+    _OnboardingPageData(
+      image: ImagePath.onboarding1,
+      title: 'إدارة مشاريعك بكل سهولة ووضوح',
+      description: 'أنشئ مشاريعك، حدّد تفاصيلها، وتابع تقدمك في مكان واحد مصمم خصيصاً للمستقلين.',
+      maxLines: 2,
+    ),
+    _OnboardingPageData(
+      image: ImagePath.onboarding2,
+      title: 'نظّم مهامك وابقَ على المسار الصحيح',
+      description: 'أضف مهام لكل مشروع، حدّد أولوياتها، وتابع حالة كل مهمة من ToDo حتى Done بسهولة وبساطة.',
+      maxLines: 2,
+    ),
+    _OnboardingPageData(
+      image: ImagePath.onboarding3,
+      title: 'اعرف أرباحك الحقيقية فوراً',
+      description: 'يحسب التطبيق ساعات عملك تلقائياً ويعرض لك أرباحك المكتسبة لكل مهمة أو مشروع، بدقة وشفافية.',
+      maxLines: 2,
+    ),
+  ];
+
+  // State
+
+  late final PageController _pageController;
+  double _currentPage = 0;
+
+  bool get _isLastPage => _currentPage.round() == _pages.length - 1;
+
+  //  Lifecycle
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController()
+      ..addListener(_onPageChanged);
+  }
+
+  @override
+  void dispose() {
+    _pageController
+      ..removeListener(_onPageChanged)
+      ..dispose();
+    super.dispose();
+  }
+
+
+  // Handlers
+  void _onPageChanged() {
+    final page = _pageController.page;
+    if (page != null && page != _currentPage) {
+      setState(() => _currentPage = page);
+    }
+  }
+
+  void _onButtonPressed() {
+    if (_isLastPage) {
+      context.read<OnboardingBloc>().add(OnboardingCompletedEvent());
+      return;
+    }
+    _pageController.nextPage(
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOut,
+    );
+  }
+
+
+  //todo: Navigator to Home screen
+  void _onStateChanged(BuildContext context, OnboardingStatus state) {
+    if (state is NavigateToLoginState) {
+      Navigator.pushReplacementNamed(context, RoutersName.loginScreen);
+    }
+  }
+
+
+  // Build
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorManager.white,
-      body: Row(
-        children: [
-          SizedBox(width: 20),
-          Column(children: [SizedBox(height: 200)]),
-        ],
+    return BlocListener<OnboardingBloc, OnboardingStatus>(
+      listener: _onStateChanged,
+      child: Scaffold(
+        backgroundColor: ColorManager.white,
+        body: PageView.builder(
+          controller: _pageController,
+          physics: const PageScrollPhysics(),
+          itemCount: _pages.length,
+          itemBuilder: _buildPage,
+        ),
       ),
     );
   }
 
-  Widget _buildOnboardingContent({
-    required String boardImage,
-    required String titleText,
-    required String decText,
-    required int? maxLine,
-    required bool isNext,
-    required VoidCallback onPressed,
-    required double currentPage,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Image.asset(boardImage, width: double.infinity, fit: BoxFit.cover),
-        Padding(
-          padding: EdgeInsets.only(top: 50.h, left: 38, right: 38),
-          child: Column(
-            spacing: 22.h,
-            children: [
-              AutoSizeText(
-                textAlign: TextAlign.center,
-                titleText,
-                maxLines: maxLine,
-                  style: TextStyleExtension.primary20bold
-              ),
-              AutoSizeText(
-                textAlign: TextAlign.center,
-                decText,
-                maxLines: maxLine,
-                  style: TextStyleExtension.black18Normal
-              ),
-              CustomElevatedButton(
-                borderRadius: 5,
-                child: Row(
-                  spacing: 5.w,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if(isNext)
-                      Icon(
-                            Icons.arrow_back_outlined,
-                            color: ColorManager.white,
-                            fontWeight: FontWeight.bold,
-                      ),
-                    Text(
-                      isNext == true ? 'التالي' : "تسجيل الدخول",
-                        style: TextStyleExtension.white16bold
-                    ),
-                  ],
-                ),
-                decorationColor: ColorManager.primaryDark,
-                onPressed: onPressed,
-              ),
-              SizedBox(height: 80.h),
-              DotsIndicator(
-                dotsCount: 3,
-                position: currentPage,
-                decorator: DotsDecorator(
-                  activeColor: ColorManager.primaryDark,
-                  size: Size.square(7.0.sp),
-                  activeSize: Size(20.0.sp, 7.0.sp),
-                  activeShape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0.r),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
+  Widget _buildPage(BuildContext context, int index) {
+    final page = _pages[index];
+    return SingleChildScrollView(
+      child: BuildOnboardingContent(
+        boardImage: page.image,
+        titleText: page.title,
+        decText: page.description,
+        maxLine: page.maxLines,
+        isNext: !_isLastPage,
+        onPressed: _onButtonPressed,
+        currentPage: _currentPage,
+        totalPages: _pages.length,
+      ),
     );
   }
+}
+
+// Model
+
+final class _OnboardingPageData {
+  const _OnboardingPageData({
+    required this.image,
+    required this.title,
+    required this.description,
+    required this.maxLines,
+  });
+
+  final String image;
+  final String title;
+  final String description;
+  final int maxLines;
 }
