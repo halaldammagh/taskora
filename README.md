@@ -1,16 +1,48 @@
-# taskora
+# Taskora — Task & Project Management App
 
-A new Flutter project.
+> Stay organized. Track progress. Know your earnings.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## Overview
 
-A few resources to get you started if this is your first Flutter project:
+Taskora is a clean and intuitive task management app built for freelancers who want to stay on t
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+op of their projects, track their work hours, and see their real earnings — all in one place.
+
+---
+
+## Demo
+
+> https://github.com/user-attachments/assets/27083cbb-98b8-4f2d-9048-535f49026fd4
+
+
+---
+
+## Features
+
+- 🚀 **Onboarding** — Shown only once on first launch
+- ✅ **Task Management** — Create, edit, and delete tasks with ease
+- 📁 **Project Organization** — Group tasks under projects
+- 📊 **Progress Tracking** — Visual status for every task
+- 🏷️ **Status System** — Pending / In Progress / Completed
+- ⚡ **Priority System** — High / Medium / Low
+- 💰 **Earnings Tracker** — Auto-calculates earnings per task and project
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| UI | Flutter |
+| State Management | Flutter Bloc |
+| Architecture | Clean Architecture |
+| Networking | Dio |
+| Local Storage | SharedPreferences |
+
+---
+
+## Architecture
