@@ -2,36 +2,35 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:taskora/core/config/constants/color_manager.dart';
-import 'package:taskora/core/extensions/text_style_extension.dart';
 
-import '../../../../../core/config/widgets/custom_elevated_button.dart';
+import '../../../../core/config/constants/color_manager.dart';
+import '../../../../core/config/widgets/custom_elevated_button.dart';
+import '../../../../core/extensions/text_style_extension.dart';
 
-class OnboardingScreen extends StatelessWidget {
-  const OnboardingScreen({super.key});
+class BuildOnboardingContent extends StatelessWidget {
+  final String boardImage;
+  final String titleText;
+  final String decText;
+  final int maxLine;
+  final bool isNext;
+  final VoidCallback onPressed;
+  final double currentPage;
+  final int totalPages;
+
+  const BuildOnboardingContent({
+    super.key,
+    required this.boardImage,
+    required this.titleText,
+    required this.decText,
+    required this.maxLine,
+    required this.isNext,
+    required this.onPressed,
+    required this.currentPage,
+    required this.totalPages,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: ColorManager.white,
-      body: Row(
-        children: [
-          SizedBox(width: 20),
-          Column(children: [SizedBox(height: 200)]),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildOnboardingContent({
-    required String boardImage,
-    required String titleText,
-    required String decText,
-    required int? maxLine,
-    required bool isNext,
-    required VoidCallback onPressed,
-    required double currentPage,
-  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -42,41 +41,41 @@ class OnboardingScreen extends StatelessWidget {
             spacing: 22.h,
             children: [
               AutoSizeText(
-                textAlign: TextAlign.center,
                 titleText,
+                textAlign: TextAlign.center,
                 maxLines: maxLine,
-                  style: TextStyleExtension.primary20bold
+                style: TextStyleExtension.primary20bold,
               ),
               AutoSizeText(
-                textAlign: TextAlign.center,
                 decText,
+                textAlign: TextAlign.center,
                 maxLines: maxLine,
-                  style: TextStyleExtension.black18Normal
+                style: TextStyleExtension.black18Normal,
               ),
               CustomElevatedButton(
                 borderRadius: 5,
+                decorationColor: ColorManager.primaryDark,
+                onPressed: onPressed,
                 child: Row(
                   spacing: 5.w,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    if(isNext)
-                      Icon(
-                            Icons.arrow_back_outlined,
-                            color: ColorManager.white,
-                            fontWeight: FontWeight.bold,
-                      ),
+
                     Text(
-                      isNext == true ? 'التالي' : "تسجيل الدخول",
-                        style: TextStyleExtension.white16bold
+                      isNext ? 'التالي' : 'تسجيل الدخول',
+                      style: TextStyleExtension.white16bold,
                     ),
+                    if (isNext)
+                      const Icon(
+                        Icons.arrow_forward, // ← arrow_forward لأن RTL
+                        color: ColorManager.white,
+                      ),
                   ],
                 ),
-                decorationColor: ColorManager.primaryDark,
-                onPressed: onPressed,
               ),
               SizedBox(height: 80.h),
               DotsIndicator(
-                dotsCount: 3,
+                dotsCount: totalPages,
                 position: currentPage,
                 decorator: DotsDecorator(
                   activeColor: ColorManager.primaryDark,

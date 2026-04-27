@@ -1,14 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:taskora/core/config/constants/app_strings.dart';
 import 'package:taskora/core/router/routers_name.dart';
 import 'package:taskora/core/theme/light_theme.dart';
+import 'package:taskora/features/onboarding/presentation/bloc/onboarding_bloc.dart';
+import 'package:taskora/features/pages/auth/presentation/login_screen/login_screen.dart';
 
+import 'core/cache/shared_prefs_utils.dart';
+import 'core/di/di.dart';
+import 'features/onboarding/presentation/bloc/onboarding_event.dart';
+import 'features/onboarding/presentation/pages/onboarding_screen.dart';
 import 'features/pages/home_screen/home_screen.dart';
-import 'features/splash_onboarding/presentation/pages/onboarding_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  configureDependencies();
+  await SharedPrefsUtils.init();
+  runApp(
+    MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+          getIt<OnboardingBloc>()
+            ..add(AppStartedEvent()),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -21,14 +42,23 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp(
-        locale: Locale('ar'),
+        locale: const Locale('ar'),
+        supportedLocales: const [
+          Locale('ar'),
+        ],
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
         debugShowCheckedModeBanner: false,
         title: AppStrings.appName,
         theme: LightTheme.lightTheme,
-        initialRoute: RoutersName.projectsScreen,
+        initialRoute: RoutersName.onboardingScreen,
         routes: {
-          RoutersName.onboardingScreen: (context) => OnboardingScreen(),
-          RoutersName.projectsScreen: (context) => HomeScreen(),
+          RoutersName.onboardingScreen: (context) => const OnboardingScreen(),
+          RoutersName.homeScreen: (context) => const HomeScreen(),
+          RoutersName.loginScreen: (context) => const LoginScreen(),
         },
       ),
     );
