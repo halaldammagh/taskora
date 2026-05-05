@@ -16,7 +16,7 @@ class OnboardingRepositoryImpl implements OnboardingRepository {
   }
 
   @override
-  Future<void> saveOnboardingCompleted() async {
+  Future<bool> saveOnboardingCompleted() async {
     // TODO: implement saveOnboardingCompleted
     return await onboardingLocalDataSource.saveOnboardingCompleted();
   }

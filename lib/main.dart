@@ -8,7 +8,6 @@ import 'package:taskora/core/theme/light_theme.dart';
 import 'package:taskora/features/onboarding/presentation/bloc/onboarding_bloc.dart';
 import 'package:taskora/features/pages/auth/presentation/login_screen/login_screen.dart';
 
-import 'core/cache/shared_prefs_utils.dart';
 import 'core/di/di.dart';
 import 'features/onboarding/presentation/bloc/onboarding_event.dart';
 import 'features/onboarding/presentation/pages/onboarding_screen.dart';
@@ -16,8 +15,7 @@ import 'features/pages/home_screen/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  configureDependencies();
-  await SharedPrefsUtils.init();
+  await configureDependencies();
   runApp(
     MultiBlocProvider(
       providers: [

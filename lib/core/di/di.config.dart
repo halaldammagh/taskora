@@ -11,6 +11,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:shared_preferences/shared_preferences.dart' as _i460;
+import 'package:taskora/core/cache/shared_prefs_utils.dart' as _i558;
+import 'package:taskora/core/di/di.dart' as _i376;
 import 'package:taskora/features/onboarding/%20domain/repository/onboarding_repository.dart'
     as _i704;
 import 'package:taskora/features/onboarding/%20domain/use_cases/check_onboarding_status_use_case.dart'
@@ -28,13 +31,21 @@ import 'package:taskora/features/onboarding/presentation/bloc/onboarding_bloc.da
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
-  _i174.GetIt init({
+  Future<_i174.GetIt> init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
-  }) {
+  }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    final registerModule = _$RegisterModule();
+    await gh.factoryAsync<_i460.SharedPreferences>(
+      () => registerModule.prefs,
+      preResolve: true,
+    );
+    gh.lazySingleton<_i558.SharedPrefsUtils>(
+      () => _i558.SharedPrefsUtils(gh<_i460.SharedPreferences>()),
+    );
     gh.lazySingleton<_i679.OnboardingLocalDataSource>(
-      () => _i51.OnboardingLocalDataSourceImpl(),
+      () => _i51.OnboardingLocalDataSourceImpl(gh<_i558.SharedPrefsUtils>()),
     );
     gh.lazySingleton<_i704.OnboardingRepository>(
       () => _i511.OnboardingRepositoryImpl(
@@ -57,3 +68,5 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
+
+class _$RegisterModule extends _i376.RegisterModule {}
