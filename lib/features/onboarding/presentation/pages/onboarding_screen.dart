@@ -16,8 +16,6 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  // Data
-
   static const _pages = [
     _OnboardingPageData(
       image: ImagePath.onboarding1,
@@ -39,36 +37,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     ),
   ];
 
-  // State
-
   late final PageController _pageController;
   double _currentPage = 0;
 
   bool get _isLastPage => _currentPage.round() == _pages.length - 1;
 
-  //  Lifecycle
   @override
   void initState() {
     super.initState();
-    _pageController = PageController()
-      ..addListener(_onPageChanged);
+    _pageController = PageController();
   }
 
   @override
   void dispose() {
-    _pageController
-      ..removeListener(_onPageChanged)
-      ..dispose();
+    _pageController.dispose();
     super.dispose();
-  }
-
-
-  // Handlers
-  void _onPageChanged() {
-    final page = _pageController.page;
-    if (page != null && page != _currentPage) {
-      setState(() => _currentPage = page);
-    }
   }
 
   void _onButtonPressed() {
@@ -82,16 +65,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-
-  //todo: Navigator to Home screen
   void _onStateChanged(BuildContext context, OnboardingStatus state) {
     if (state is NavigateToLoginState) {
       Navigator.pushReplacementNamed(context, RoutersName.loginScreen);
     }
   }
 
-
-  // Build
   @override
   Widget build(BuildContext context) {
     return BlocListener<OnboardingBloc, OnboardingStatus>(
@@ -102,6 +81,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           controller: _pageController,
           physics: const PageScrollPhysics(),
           itemCount: _pages.length,
+          onPageChanged: (index) =>
+              setState(() => _currentPage = index.toDouble()),
           itemBuilder: _buildPage,
         ),
       ),
@@ -124,8 +105,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 }
-
-// Model
 
 final class _OnboardingPageData {
   const _OnboardingPageData({

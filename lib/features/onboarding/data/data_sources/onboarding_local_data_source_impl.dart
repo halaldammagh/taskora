@@ -4,21 +4,21 @@ import 'package:taskora/features/onboarding/data/data_sources/onboarding_local_d
 
 @LazySingleton(as: OnboardingLocalDataSource)
 class OnboardingLocalDataSourceImpl implements OnboardingLocalDataSource {
+  final SharedPrefsUtils _sharedPrefsUtils;
+
+  OnboardingLocalDataSourceImpl(
+      this._sharedPrefsUtils); // ← constructor injection
+
   static const String _onboardingKey = 'onboarding_completed';
 
   @override
   Future<bool> isOnboardingCompleted() async {
-    final result = SharedPrefsUtils.getData(key: _onboardingKey);
-    return result as bool? ?? false;
+    return _sharedPrefsUtils.getBool(_onboardingKey) ??
+        false; // ← آمن بدون casting
   }
 
   @override
   Future<bool> saveOnboardingCompleted() async {
-    // TODO: implement saveOnboardingCompleted
-    final saveData = await SharedPrefsUtils.saveData(
-      key: _onboardingKey,
-      value: true,
-    );
-    return saveData;
+    return await _sharedPrefsUtils.saveData(key: _onboardingKey, value: true);
   }
 }

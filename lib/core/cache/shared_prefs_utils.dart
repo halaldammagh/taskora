@@ -1,37 +1,31 @@
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+@lazySingleton
 class SharedPrefsUtils {
-  static late SharedPreferences sharedPrefs;
+  final SharedPreferences _prefs;
 
-  static init() async {
-    sharedPrefs = await SharedPreferences.getInstance();
-  }
+  SharedPrefsUtils(this._prefs);
 
-  //todo: write data
-  static Future<bool> saveData({
+  Future<bool> saveData({
     required String key,
     required dynamic value,
   }) async {
-    if (value is int) {
-      return await sharedPrefs.setInt(key, value);
-    } else if (value is double) {
-      return await sharedPrefs.setDouble(key, value);
-    } else if (value is String) {
-      return await sharedPrefs.setString(key, value);
-    } else if (value is bool) {
-      return await sharedPrefs.setBool(key, value);
-    } else {
-      throw Exception("Unsupported type");
-    }
+    if (value is int) return _prefs.setInt(key, value);
+    if (value is double) return _prefs.setDouble(key, value);
+    if (value is String) return _prefs.setString(key, value);
+    if (value is bool) return _prefs.setBool(key, value);
+    throw Exception("Unsupported type");
   }
 
-  //todo: read data
-  static Object? getData({required String key}) {
-    return sharedPrefs.get(key);
+  Object? getData({required String key}) {
+    return _prefs.get(key);
   }
 
-  //todo: remove data
-  static Future<bool> removeData({required String key}) async {
-    return await sharedPrefs.remove(key);
+  bool? getBool(String key) => _prefs.getBool(key);
+
+
+  Future<bool> removeData({required String key}) async {
+    return await _prefs.remove(key);
   }
 }
